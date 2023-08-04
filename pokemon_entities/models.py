@@ -16,7 +16,7 @@ class Pokemon(models.Model):
                               null=True,
                               blank=True,
                               verbose_name='Картинка')
-    description = models.CharField(max_length=400,
+    description = models.TextField(max_length=400,
                                    blank=True,
                                    verbose_name='Описание')
     previous_evolution = models.ForeignKey("self",
