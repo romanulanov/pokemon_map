@@ -27,7 +27,7 @@ class Pokemon(models.Model):
                                            related_name='next_gen')
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return self.title
 
 
 class PokemonEntity(models.Model):
