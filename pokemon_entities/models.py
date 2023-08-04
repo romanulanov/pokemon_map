@@ -16,28 +16,9 @@ class Pokemon(models.Model):
                               null=True,
                               blank=True,
                               verbose_name='Картинка')
-    appeared_at = models.DateTimeField(default=now,
-                                       verbose_name='Появится')
-    disappeared_at = models.DateTimeField(default=now,
-                                          verbose_name='Исчезнет')
     description = models.CharField(max_length=400,
                                    blank=True,
                                    verbose_name='Описание')
-    level = models.IntegerField(blank=True,
-                                verbose_name='Уровень',
-                                null=True)
-    health = models.IntegerField(blank=True,
-                                 verbose_name='Здоровье',
-                                 null=True)
-    strength = models.IntegerField(blank=True,
-                                   verbose_name='Атака',
-                                   null=True)
-    defence = models.IntegerField(blank=True,
-                                  verbose_name='Защита',
-                                  null=True)
-    stamina = models.IntegerField(blank=True,
-                                  verbose_name='Выносливость',
-                                  null=True)
     previous_evolution = models.ForeignKey("self",
                                            verbose_name='Из кого эволюционирует',
                                            on_delete=models.SET_NULL,
@@ -53,3 +34,22 @@ class PokemonEntity(models.Model):
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, verbose_name='Покемон')
     lat = models.FloatField(verbose_name='Широта')
     lon = models.FloatField(verbose_name='Долгота')
+    appeared_at = models.DateTimeField(default=now,
+                                       verbose_name='Появится')
+    disappeared_at = models.DateTimeField(default=now,
+                                          verbose_name='Исчезнет')
+    level = models.IntegerField(blank=True,
+                                verbose_name='Уровень',
+                                null=True)
+    health = models.IntegerField(blank=True,
+                                 verbose_name='Здоровье',
+                                 null=True)
+    strength = models.IntegerField(blank=True,
+                                   verbose_name='Атака',
+                                   null=True)
+    defence = models.IntegerField(blank=True,
+                                  verbose_name='Защита',
+                                  null=True)
+    stamina = models.IntegerField(blank=True,
+                                  verbose_name='Выносливость',
+                                  null=True)
