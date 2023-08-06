@@ -38,14 +38,14 @@ def show_all_pokemons(request):
                 add_pokemon(
                     folium_map, pokemon_entity.lat,
                     pokemon_entity.lon,
-                    request.build_absolute_uri(f'/media/{pokemon_entity.pokemon.photo}')
+                    request.build_absolute_uri(pokemon_entity.pokemon.photo.url)
                 )
 
     pokemons_on_page = []
     for pokemon in Pokemon.objects.all():
         pokemons_on_page.append({
             'pokemon_id': pokemon.id,
-            'img_url': request.build_absolute_uri(f'/media/{pokemon.photo}'),
+            'img_url': request.build_absolute_uri(pokemon.photo.url),
             'title_ru': pokemon.title,
         })
     return render(request, 'mainpage.html', context={
@@ -60,20 +60,20 @@ def show_pokemon(request, pokemon_id):
     previous_evolution, next_evolution = {}, {}
     if pokemon.previous_evolution:
         previous_evolution = {"title_ru": pokemon.previous_evolution.title,
-                              "pokemon_id": pokemon.previous_evolution.id,
-                              "img_url": request.build_absolute_uri(f'/media/{pokemon.previous_evolution.photo}'),
+                              "pokemon_id": pokemon.previous_evolution.pk,
+                              "img_url": request.build_absolute_uri(pokemon.previous_evolution.photo.url),
                               }
     if pokemon.next_gen.first():
         next_evolution = {"title_ru": pokemon.next_gen.first().title,
-                          "pokemon_id": pokemon.next_gen.first().id,
-                          "img_url": request.build_absolute_uri(f'/media/{pokemon.next_gen.first().photo}'),
+                          "pokemon_id": pokemon.next_gen.first().pk,
+                          "img_url": request.build_absolute_uri(pokemon.next_gen.first().photo.url),
                           }
 
-    requested_pokemon = {"pokemon_id": pokemon.id,
+    requested_pokemon = {"pokemon_id": pokemon.pk,
                          "title_ru": pokemon.title,
                          "title_en": pokemon.title_en,
                          "title_jp": pokemon.title_jp,
-                         "img_url": request.build_absolute_uri(f'/media/{pokemon.photo}'),
+                         "img_url": request.build_absolute_uri(pokemon.photo.url),
                          "description": pokemon.description,
                          "previous_evolution": previous_evolution,
                          "next_evolution": next_evolution
@@ -86,7 +86,7 @@ def show_pokemon(request, pokemon_id):
         add_pokemon(
             folium_map, pokemon_entity.lat,
             pokemon_entity.lon,
-            request.build_absolute_uri(f'/media/{pokemon_entity.pokemon.photo}')
+            request.build_absolute_uri(pokemon_entity.pokemon.photo.url)
         )
 
     return render(request, 'pokemon.html', context={
