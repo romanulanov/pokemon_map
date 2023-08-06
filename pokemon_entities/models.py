@@ -53,3 +53,5 @@ class PokemonEntity(models.Model):
     stamina = models.IntegerField(blank=True,
                                   verbose_name='Выносливость',
                                   null=True)
+    def __str__(self):
+        return self.lat, self.lon
