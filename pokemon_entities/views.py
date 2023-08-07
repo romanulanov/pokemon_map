@@ -64,9 +64,10 @@ def show_pokemon(request, pokemon_id):
                               "img_url": request.build_absolute_uri(pokemon.previous_evolution.photo.url),
                               }
     if pokemon.next_gen.first():
-        next_evolution = {"title_ru": pokemon.next_gen.first().title,
-                          "pokemon_id": pokemon.next_gen.first().pk,
-                          "img_url": request.build_absolute_uri(pokemon.next_gen.first().photo.url),
+        next_gen = pokemon.next_gen.first()
+        next_evolution = {"title_ru": next_gen.title,
+                          "pokemon_id": next_gen.pk,
+                          "img_url": request.build_absolute_uri(next_gen.photo.url),
                           }
 
     requested_pokemon = {"pokemon_id": pokemon.pk,
